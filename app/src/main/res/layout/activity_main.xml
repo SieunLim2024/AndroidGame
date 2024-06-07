@@ -7,13 +7,275 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
+    <Button
+        android:id="@+id/roll"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
+        android:layout_marginEnd="19dp"
+        android:layout_marginBottom="41dp"
+        android:text="ROLL"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/story"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="40dp"
+        android:text="STORY"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/map0"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/roll"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.636"
+        app:layout_constraintStart_toStartOf="@+id/roll"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.98"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map1"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map2"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map3"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map4"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map5"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map6"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map7"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="260dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map8"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginEnd="143dp"
+        android:layout_marginBottom="344dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/dice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map9"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="424dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map10"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="12dp"
+        android:layout_marginBottom="504dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map11"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginBottom="504dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map12"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="140dp"
+        android:layout_marginBottom="504dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map13"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="204dp"
+        android:layout_marginBottom="504dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map14"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="268dp"
+        android:layout_marginTop="147dp"
+        android:layout_marginBottom="136dp"
+        app:layout_constraintBottom_toTopOf="@+id/dice"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map15"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="504dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map16"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="424dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map17"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="344dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map18"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="264dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <ImageView
+        android:id="@+id/map19"
+        android:layout_width="63dp"
+        android:layout_height="80dp"
+        android:layout_marginStart="332dp"
+        android:layout_marginBottom="180dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/map0_00" />
+
+    <TextView
+        android:id="@+id/palyerScoreV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="52dp"
+        android:layout_marginTop="48dp"
+        android:text="playerScore: 0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/computerScoreV"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="computerScore: 0"
+        app:layout_constraintStart_toStartOf="@+id/palyerScoreV"
+        app:layout_constraintTop_toBottomOf="@+id/palyerScoreV" />
+
+    <TextView
+        android:id="@+id/end"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:text=""
+        android:visibility="gone"
+        app:layout_constraintBottom_toTopOf="@+id/palyerScoreV"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageView
+        android:id="@+id/dice"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginEnd="127dp"
+        android:layout_marginBottom="305dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/map8"
+        app:layout_constraintTop_toBottomOf="@+id/map14"
+        app:srcCompat="@drawable/dice_1" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

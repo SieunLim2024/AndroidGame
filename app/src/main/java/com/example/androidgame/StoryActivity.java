@@ -12,7 +12,7 @@ public class StoryActivity extends AppCompatActivity {
     @Override
     public void onCreate(Bundle saveInstanceState) {
         super.onCreate(saveInstanceState);
-        setContentView(R.layout.storyLayout);
+        setContentView(R.layout.storylayout);
 
 
         Intent intent=getIntent();//인텐트를 받아온다.
@@ -21,14 +21,10 @@ public class StoryActivity extends AppCompatActivity {
         TextView scriptView=(TextView)findViewById(R.id.scriptView);
         scriptView.setText(scriptText);//받아온 script(대사)를 textview에 넣어준다.
 
-
         Button close =(Button)findViewById(R.id.close);
-        close.setOnClickListener(new onClickListener(){
-            public void onClick(View v){
-                finish();
-                //버튼이 클릭되면 finish() 메소드 호출하여 현재 액티비티를 종료한다.
-            }
-        });
     }
-
+    public void close(View v){
+        finish();
+        //버튼이 클릭되면 finish() 메소드 호출하여 현재 액티비티를 종료한다.
+    };
 }

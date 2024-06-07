@@ -10,9 +10,6 @@ import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
 import java.util.Random;
 
@@ -63,9 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
         dice = (ImageView) findViewById(R.id.dice);//주사위 이미지 뷰
 
-        palyerMarker = (ImageView) findViewById(R.id.palyerMarker);//유저 말
-        computerMarker = (ImageView) findViewById(R.id.computerMarker);//컴퓨터 말
-
         roll = (Button) findViewById(R.id.roll); //roll 버튼
         story = (Button) findViewById(R.id.story); //story 버튼
 
@@ -93,7 +87,7 @@ public class MainActivity extends AppCompatActivity {
 
         //imageView의 칸별 아이디 값
         mapView= new int[]{
-                R.id.map0,R.id.map1,R.id.map2,R.id.map3,R.id.map4,R.id.map5,R.id.map6,R.id.map7,R.id.map8,
+                R.id.map0,R.id.map2,R.id.map2,R.id.map3,R.id.map4,R.id.map5,R.id.map6,R.id.map7,R.id.map8,
                 R.id.map9,R.id.map10,R.id.map11,R.id.map12,R.id.map13,R.id.map14,R.id.map15,R.id.map16,
                 R.id.map17,R.id.map18,R.id.map19
         };
@@ -221,13 +215,16 @@ public class MainActivity extends AppCompatActivity {
             userScore=0;
         }
         if (turn == 0) {//유저 턴이면
-            palyerScoreV.setText(playerScore);
+            String message="playerScore: "+playerScore;
+            palyerScoreV.setText(message);
         } else {
-            computerScoreV.setText(computerScore);
+            String message="computerScore: "+computerScore;
+            palyerScoreV.setText(message);
         }
 
         if(userScore>WINSCORE){//목표 점수 이상이 된다면
             roll.setVisibility(View.GONE);//굴리기 버튼 안 보이게 만듬
+            end.setVisibility(View.VISIBLE);//엔딩 안내 택스트 뷰 보이게 만듬
             end.setText(String.format("승자는 %s 입니다!", (turn == 0) ? ("당신") : ("컴퓨터")));
         }
     }
