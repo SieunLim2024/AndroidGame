@@ -23,9 +23,9 @@ public class MainActivity extends AppCompatActivity {
     private static int[] mapView;//말판 이미지 뷰 아이디 배열
     private static int[][] mapImage;//말판 이미지 아이디 배열
     private static String[][] event;//이벤트 스크립트와 점수 배열
-    private static int turn;//0은 유저 1은 컴퓨터
-    private static int playerLocation;//말 칸 위치
-    private static int computerLocation;//말 칸 위치
+    private static int turn=0;//0은 유저 1은 컴퓨터
+    private static int playerLocation=0;//말 칸 위치
+    private static int computerLocation=0;//말 칸 위치
     private static int playerScore;//플레이어 점수
     private static int computerScore;//컴퓨터 점수
     private static boolean flagBonus;//한바퀴 돌고 보너스 받을거 있는지
@@ -80,10 +80,11 @@ public class MainActivity extends AppCompatActivity {
                 {"당신은 병에 걸려 치료비를 지불했다!", "-10"},
                 {"당신은 금화가 담긴 상자를 발견했다!", "10"},
                 {"당신은 모래 바람을 만나 금화를 잃어버렸다!", "-5"},
-                {"당신은 주머니가 찢어져 금화가 사라진 걸 깨닫았다!", "-5"}
+                {"당신은 가방이 찢어져 금화가 사라진 걸 깨닫았다!", "-5"}
         };//대사,보너스 혹은 감점
 
         map=new int[20];//칸별로 말이 있는지 여부 아무도 없으면 0 유저가 있으면 1 컴퓨터가 있으면 2 둘다 있으면 3
+        map[0]=3;
 
         //imageView의 칸별 아이디 값
         mapView= new int[]{
@@ -108,24 +109,24 @@ public class MainActivity extends AppCompatActivity {
     //roll버튼을 누르면
     public void roll(View v) {
         //랜덤 값 생성
+        //랜덤 값 생성
         Random random = new Random();
         diceFace = random.nextInt(6);
-        dice.setImageResource(images[diceFace]);//주사위 이미지 바꿔줌
-
-
 
         if (turn == 0) {//유저의 순서면
             storyFlag = false;//스토리 안 본걸로 바꿔놓음
-            move(playerLocation,playerScore,diceFace); //말(이미지 뷰) 위치 이동
+            move(playerLocation,playerScore,diceFace+1); //말(이미지 뷰) 위치 이동
 
             turn = 1;//턴 넘겨줌
         } else if (turn == 1 && storyFlag == true) {//컴퓨터 차례이고 스토리를 보고 왔다면
-            move(computerLocation,computerScore,diceFace); //말(이미지 뷰) 위치 이동
+            move(computerLocation,computerScore,diceFace+1); //말(이미지 뷰) 위치 이동
 
             turn = 0;//턴 넘겨줌
-        } else if (turn == 1 && storyFlag == false) {// 스토리를 보지 않았다면
-            Toast.makeText(getApplicationContext(), "먼저 스토리를 봐주세요!", Toast.LENGTH_SHORT).show();
+        } else{// 스토리를 보지 않았다면
+           Toast.makeText(getApplicationContext(), "먼저 스토리를 봐주세요!", Toast.LENGTH_SHORT).show();
+           return;
         }
+        dice.setImageResource(images[diceFace]);//주사위 이미지 바꿔줌
 
 
     }
@@ -146,12 +147,21 @@ public class MainActivity extends AppCompatActivity {
 
         //다이스 값 적용하기===========================================================================
         userLocation += diceFace;//주사위 굴린 만큼 증가
-
-        if (userLocation >= map.length) {//한바퀴 돌았을때
-            userLocation -= map.length;//다시 0부터...
-            flagBonus=true;
+        if (turn == 0) {
+            playerLocation += diceFace;//주사위 굴린 만큼 증가
+            if (playerLocation >= 20) {//한바퀴 돌았을때
+                playerLocation -= 20;//다시 0부터...
+                userLocation-= 20;//다시 0부터...
+                flagBonus=true;
+            }
+        } else {
+            computerLocation += diceFace;//주사위 굴린 만큼 증가
+            if (computerLocation >= 20) {//한바퀴 돌았을때
+                computerLocation -= 20;//다시 0부터...
+                userLocation-= 20;//다시 0부터...
+                flagBonus=true;
+            }
         }
-
         //말 새로 놓기================================================================================
         ImageView newMapView = (ImageView) findViewById(mapView[userLocation]);//새로 놓은 곳 말판 뷰
 
@@ -163,12 +173,13 @@ public class MainActivity extends AppCompatActivity {
 
         eventNum =checkEventNum(userLocation);//현 위치의 이벤트 번호 받아오기
 
+
         newMapView.setImageResource(mapImage[eventNum][map[userLocation]]);//말판에 해당 말 더한 이미지로 바꿈
         //점수 계산===================================================================================
-        calScore(userScore, Integer.parseInt(event[eventNum][1]));//점수 계산(이벤트로 얻은 것만)
+        calScore(Integer.parseInt(event[eventNum][1]));//점수 계산(이벤트로 얻은 것만)
 
         if(flagBonus){//한바퀴 돌아서 보너스 받아야한다면
-            calScore(userScore, BONUSCOIN); //보너스 금화 받기
+            calScore(BONUSCOIN); //보너스 금화 받기
             flagBonus=false;
         }
 
@@ -208,22 +219,32 @@ public class MainActivity extends AppCompatActivity {
     }
 
     //점수를 계산하는 메소드
-    public static void calScore(int userScore, int score) {
-        userScore += score;
-        if(userScore<0){
-            //점수가 0점 이하이면 0으로
-            userScore=0;
-        }
-        if (turn == 0) {//유저 턴이면
+    public static void calScore(int score) {
+        int userScore=0;
+        if (turn == 0) {
+            playerScore += score;
+            if(playerScore<0){
+                //점수가 0점 이하이면 0으로
+                playerScore=0;
+            }
+            userScore=playerScore;
+
             String message="playerScore: "+playerScore;
             palyerScoreV.setText(message);
         } else {
+            computerScore += score;
+            if(computerScore<0){
+                //점수가 0점 이하이면 0으로
+                computerScore=0;
+            }
+            userScore=computerScore;
+
             String message="computerScore: "+computerScore;
-            palyerScoreV.setText(message);
+            computerScoreV.setText(message);
         }
 
-        if(userScore>WINSCORE){//목표 점수 이상이 된다면
-            roll.setVisibility(View.GONE);//굴리기 버튼 안 보이게 만듬
+        if(userScore>=WINSCORE){//목표 점수 이상이 된다면
+            roll.setVisibility(View.INVISIBLE);//굴리기 버튼 안 보이게 만듬(자리 차지는 그대로)
             end.setVisibility(View.VISIBLE);//엔딩 안내 택스트 뷰 보이게 만듬
             end.setText(String.format("승자는 %s 입니다!", (turn == 0) ? ("당신") : ("컴퓨터")));
         }
@@ -231,11 +252,11 @@ public class MainActivity extends AppCompatActivity {
 
     //스토리 버튼 누르면... 화면 전환하면서 대사 전달
     public void story(View v) {
+        storyFlag = true;//스토리 봤는지 여부
         Intent intent = new Intent(MainActivity.this, StoryActivity.class);
         intent.putExtra("script", event[eventNum][0]);//해당하는 이벤트 대사(스크립트) 넣어줌
         startActivity(intent);
 
-        storyFlag = true;//스토리 봤는지 여부
         story.setVisibility(View.GONE);//다시 버튼 안 보이게 만듬
     }
 

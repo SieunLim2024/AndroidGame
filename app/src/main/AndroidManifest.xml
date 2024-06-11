@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".StoryActivity" android:label="StoryActivity">
+            android:name=".StoryActivity">
         </activity>
     </application>
 

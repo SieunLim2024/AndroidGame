@@ -13,7 +13,9 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="19dp"
         android:layout_marginBottom="41dp"
+        android:onClick="roll"
         android:text="ROLL"
+        android:visibility="visible"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -23,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
         android:layout_marginBottom="40dp"
+        android:onClick="story"
         android:text="STORY"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -38,7 +41,7 @@
         app:layout_constraintStart_toStartOf="@+id/roll"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.98"
-        app:srcCompat="@drawable/map0_00" />
+        app:srcCompat="@drawable/map0_11" />
 
     <ImageView
         android:id="@+id/map1"
@@ -257,13 +260,12 @@
         android:id="@+id/end"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="15dp"
         android:text=""
-        android:visibility="gone"
-        app:layout_constraintBottom_toTopOf="@+id/palyerScoreV"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/map12"
+        app:layout_constraintEnd_toEndOf="@+id/map12"
+        app:layout_constraintStart_toEndOf="@+id/map12" />
 
     <ImageView
         android:id="@+id/dice"
