@@ -17,15 +17,15 @@ public class MainActivity extends AppCompatActivity {
     private ImageView dice; //주사위 이미지
     private static Button roll;//주사위 굴리는 버튼
     private static Button story;//스토리 보는 버튼
-    private static int diceFace;//주사위 값
+    private int diceFace;//주사위 값
     private int[] images;//주사위 이미지 아이디 배열
     private static int[] map;//말판 별로 말 있는지 여부
     private static int[] mapView;//말판 이미지 뷰 아이디 배열
     private static int[][] mapImage;//말판 이미지 아이디 배열
     private static String[][] event;//이벤트 스크립트와 점수 배열
-    private static int turn=0;//0은 유저 1은 컴퓨터
-    private static int playerLocation=0;//말 칸 위치
-    private static int computerLocation=0;//말 칸 위치
+    private static int turn;//0은 유저 1은 컴퓨터
+    private int playerLocation;//말 칸 위치
+    private int computerLocation;//말 칸 위치
     private static int playerScore;//플레이어 점수
     private static int computerScore;//컴퓨터 점수
     private static boolean flagBonus;//한바퀴 돌고 보너스 받을거 있는지
@@ -44,8 +44,9 @@ public class MainActivity extends AppCompatActivity {
     public static final int EVENT6 = 17;
     public static final int EVENT7 = 19;
 
-    public static int eventNum = 0; //이벤트 번호
+    public static int eventNum; //이벤트 번호
     private boolean storyFlag;//스토리 봤는지 여부
+    private static Button reset;//리셋 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
 
         roll = (Button) findViewById(R.id.roll); //roll 버튼
         story = (Button) findViewById(R.id.story); //story 버튼
+        reset = (Button) findViewById(R.id.reset); //reset 버튼
 
         //다이스 이미지 배열
         images = new int[]{
@@ -71,6 +73,14 @@ public class MainActivity extends AppCompatActivity {
 
         //다이스 초기값
         diceFace = 1;
+        //말 칸 위치
+        playerLocation=0;
+        //말 칸 위치
+        computerLocation=0;
+        //0은 유저 1은 컴퓨터
+        turn=0;
+        //이벤트 번호
+        eventNum = 0;
 
         //이벤트 스크립트와 점수 배열
         event = new String[][]{
@@ -109,7 +119,6 @@ public class MainActivity extends AppCompatActivity {
     //roll버튼을 누르면
     public void roll(View v) {
         //랜덤 값 생성
-        //랜덤 값 생성
         Random random = new Random();
         diceFace = random.nextInt(6);
 
@@ -123,8 +132,8 @@ public class MainActivity extends AppCompatActivity {
 
             turn = 0;//턴 넘겨줌
         } else{// 스토리를 보지 않았다면
-           Toast.makeText(getApplicationContext(), "먼저 스토리를 봐주세요!", Toast.LENGTH_SHORT).show();
-           return;
+            Toast.makeText(getApplicationContext(), "먼저 스토리를 봐주세요!", Toast.LENGTH_SHORT).show();
+            return;
         }
         dice.setImageResource(images[diceFace]);//주사위 이미지 바꿔줌
 
@@ -246,6 +255,7 @@ public class MainActivity extends AppCompatActivity {
         if(userScore>=WINSCORE){//목표 점수 이상이 된다면
             roll.setVisibility(View.INVISIBLE);//굴리기 버튼 안 보이게 만듬(자리 차지는 그대로)
             end.setVisibility(View.VISIBLE);//엔딩 안내 택스트 뷰 보이게 만듬
+            reset.setVisibility(View.VISIBLE);// 버튼 보이게 만듬
             end.setText(String.format("승자는 %s 입니다!", (turn == 0) ? ("당신") : ("컴퓨터")));
         }
     }
@@ -258,6 +268,39 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
 
         story.setVisibility(View.GONE);//다시 버튼 안 보이게 만듬
+
+    }
+
+    //리셋 버튼 누르면... 이것저것 다 처음 값으로
+    public void reset(View v) {
+        turn=0;//0은 유저 1은 컴퓨터
+
+        map[playerLocation] -= 1;//유저 말 빼줌
+        map[computerLocation] -= 2;//컴퓨터 말 빼줌
+
+        playerLocation=0;//말 칸 위치
+        computerLocation=0;//말 칸 위치
+
+        map[0]=3;;//모든 말은 첫번째 칸으로
+        playerScore=0;//점수 초기화
+        computerScore=0;//점수 초기화
+
+        for(int i=0;i<map.length;i++){//모든 말칸 뷰를 바꿔줌
+            ImageView MapView = (ImageView) findViewById(mapView[i]);//말판 뷰
+            eventNum =checkEventNum(i);//이벤트 번호 받아오기
+            MapView.setImageResource(mapImage[0][map[i]]);//해당 말 뺀 이미지로 바꿈
+        }
+        end.setText("");
+        end.setVisibility(View.INVISIBLE);//엔딩 안내 택스트 뷰 보이게 만듬
+
+        String message1="playerScore: 0";
+        palyerScoreV.setText(message1);
+
+        String message2="computerScore: 0";
+        computerScoreV.setText(message2);
+
+        roll.setVisibility(View.VISIBLE);// 버튼 보이게 만듬
+        reset.setVisibility(View.INVISIBLE);// 버튼 안 보이게 만듬
     }
 
 }
